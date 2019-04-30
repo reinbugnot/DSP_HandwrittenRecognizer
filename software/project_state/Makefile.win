@@ -1,0 +1,46 @@
+# Project: Project1
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ IDE 7.4.2.569 on 10/12/18 11:21
+
+WXLIBNAME = wxmsw29u
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = "windres.exe"
+OBJ       = Objects/MingW/UploadApp.o Objects/MingW/UploadFrm.o Objects/MingW/Upload_private.res
+LINKOBJ   = "Objects/MingW/UploadApp.o" "Objects/MingW/UploadFrm.o" Objects/MingW/Upload_private.res
+LIBS      = -L"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/lib/wx/gcc_lib" -L"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/lib" -L"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/MinGW32/lib" -mwindows -l$(WXLIBNAME) -l$(WXLIBNAME)_gl -lwxscintilla -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lodbc32 -lopengl32  
+INCS      = -I"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/MinGW32/include"
+CXXINCS   = -I"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/MinGW32/include" -I"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/" -I"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/include/common" -I"C:/Users/FB/Downloads/wxDevCppP7-64b/App/devcpp/include"
+RCINCS    = --include-dir "C:/Users/FB/DOWNLO~1/WXDEVC~1/App/devcpp/include/common"
+BIN       = Output/MingW/Upload.exe
+DEFINES   = -D__WXMSW__ -D__GNUWIN32__ -D_UNICODE
+CXXFLAGS  = $(CXXINCS) $(DEFINES)  
+CFLAGS    = $(INCS) $(DEFINES)  
+GPROF     = gprof.exe
+ifeq ($(OS),Windows_NT)
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+else
+   RM = rm -f
+   FixPath = $1
+endif
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(call FixPath,$(LINKOBJ)) "$(call FixPath,$(BIN))"
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS) 
+
+Objects/MingW/UploadApp.o: $(GLOBALDEPS) UploadApp.cpp UploadApp.h UploadFrm.h
+	$(CPP) -c UploadApp.cpp -o Objects/MingW/UploadApp.o $(CXXFLAGS)
+
+Objects/MingW/UploadFrm.o: $(GLOBALDEPS) UploadFrm.cpp UploadFrm.h
+	$(CPP) -c UploadFrm.cpp -o Objects/MingW/UploadFrm.o $(CXXFLAGS)
+
+Objects/MingW/Upload_private.res: Objects/MingW/Upload_private.rc UploadApp.rc 
+	$(WINDRES) --input-format=rc -o Objects/MingW/Upload_private.res $(RCINCS) Objects/MingW/UPLOAD~1.RC -O coff
